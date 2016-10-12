@@ -2,6 +2,7 @@
   "compileOnSave": false,
   "buildOnSave": false,
   "compilerOptions": {
+    "declaration": true,
     "module": "commonjs",
     "target": "ES6",
     "emitDecoratorMetadata": true,
@@ -10,7 +11,8 @@
     "removeComments": false,
     "sourceMap": true,
     "strictNullChecks": true,    
-    "jsx": "react"
+    "outDir": "../../../../",
+    "rootDir": "."
   },
   "exclude": [
     "node_modules",

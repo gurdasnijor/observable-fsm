@@ -1,16 +1,16 @@
 import { Observable, Subscriber } from '@reactivex/rxjs';
 
 
-type TargetState = {
+export type TargetState = {
   name: string,
   data: any
 };
 
-type EventMap = {
+export type EventMap = {
   [action: string]: TargetState,
 };
 
-type StateMachineMap = {
+export type StateMachineMap = {
   [stateKey: string]: EventMap
 };
 
@@ -22,7 +22,7 @@ export default function createObservableFSM(
   definition: StateMachineMap,
   initialStateKey: string,
   eventStreamObservable: Observable<string>
-) : Observable<TargetState>{
+) : Observable<TargetState> {
 
   let curState = definition[initialStateKey];
 
@@ -32,13 +32,13 @@ export default function createObservableFSM(
 
   return new Observable((observer: Subscriber<TargetState>) => {
     eventStreamObservable.subscribe(
-      (event) => {
+      event => {
         const newState = curState[event];
-        
+
         observer.next(newState);
         curState = definition[newState.name];
       },
-      (err) => observer.error(err),
+      err => observer.error(err),
       () => observer.complete()
     );
   });

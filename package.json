@@ -2,12 +2,12 @@
   "name": "observable-fsm",
   "version": "0.0.1",
   "description": "Library for producing an Observable state machine",
-  "main": "lib/library.js",
+  "main": "lib/index.js",
+  "typings": "./lib/src/index.d.ts",
   "scripts": {
     "build": "webpack --mode=build",
     "dev": "webpack --progress --colors --watch --mode=dev",
-    "pretest": "tsc ./test/*.spec.ts --module commonjs",
-    "test": "mocha --compilers js:babel-core/register --colors -w ./test/*.spec.js"
+    "test": "mocha --require ts-node/register ./test/*.spec.ts"
   },
   "devDependencies": {
     "@types/es6-shim": "^0.31.32",
@@ -23,6 +23,7 @@
     "eslint-loader": "1.1.0",
     "mocha": "2.3.4",
     "ts-loader": "^0.8.1",
+    "ts-node": "^1.4.3",
     "typescript": "^2.0.3",
     "webpack": "1.12.9",
     "yargs": "3.32.0"

@@ -1,27 +1,13 @@
-var webpack = require('webpack');
-var UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 var path = require('path');
-var env = require('yargs').argv.mode;
 
-var libraryName = 'Library';
-var plugins = [], outputFile;
-
-if (env === 'build') {
-  plugins.push(new UglifyJsPlugin({ minimize: true }));
-  outputFile = libraryName + '.min.js';
-} else {
-  outputFile = libraryName + '.js';
-}
-
-var config = {
+module.exports = {
   entry: __dirname + '/src/index.ts',
   devtool: 'source-map',
   output: {
     path: __dirname + '/lib',
-    filename: outputFile,
-    library: libraryName,
-    libraryTarget: 'umd',
-    umdNamedDefine: true
+    filename: 'index.js',
+    library: 'index',
+    libraryTarget: 'commonjs'
   },
   module: {
     loaders: [
@@ -44,9 +30,9 @@ var config = {
     resolve: {
       root: path.resolve('./src'),
       extensions: ['', '.js', '.ts']
-    },
-    plugins: plugins
+    }
+  },
+  externals: {
+    ['@reactivex/rxjs']: '@reactivex/rxjs'
   }
 };
-
-module.exports = config;

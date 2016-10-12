@@ -1,11 +1,10 @@
 import * as chai from 'chai';
-import observableSM from '../src/index.js';
+import observableSM from '../src/index';
 import { Observable } from '@reactivex/rxjs';
-
+import * as mocha from 'mocha';
 
 chai.expect({});
 const expect = chai.expect;
-
 
 describe('Observable SM', function () {
   describe('when I provide a SM definition and Observable event stream', function () {

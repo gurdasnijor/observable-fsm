@@ -6,9 +6,12 @@
   "scripts": {
     "build": "webpack --mode=build",
     "dev": "webpack --progress --colors --watch --mode=dev",
+    "pretest": "tsc ./test/*.spec.ts --module commonjs",
     "test": "mocha --compilers js:babel-core/register --colors -w ./test/*.spec.js"
   },
   "devDependencies": {
+    "@types/es6-shim": "^0.31.32",
+    "@types/mocha": "^2.2.32",
     "babel": "6.3.13",
     "babel-core": "6.1.18",
     "babel-eslint": "5.0.0",
@@ -19,11 +22,13 @@
     "eslint": "1.7.2",
     "eslint-loader": "1.1.0",
     "mocha": "2.3.4",
+    "ts-loader": "^0.8.1",
+    "typescript": "^2.0.3",
     "webpack": "1.12.9",
     "yargs": "3.32.0"
   },
   "peerDependencies": {
-    "rx": "^4.1.0"
+    "@reactivex/rxjs": "^5.0.0-rc.1"
   },
   "repository": {
     "type": "git",

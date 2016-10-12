@@ -1,33 +1,21 @@
-import { Observable } from 'rx';
-
+"use strict";
+var rxjs_1 = require('@reactivex/rxjs');
 /**
  * Produces an Observable that represents a sequence of states in a state
  * machine being transisitoned by a corresponding Observable sequence of events
  */
-export default function (
-  definition,
-  initialStateKey,
-  eventStreamObservable
-) {
-
-  let curState = definition[initialStateKey];
-
-  // TODO: validate definition object upfront here
-
-  if (!curState) {
-    throw new Error(`No state corresponding to key ${initialStateKey} found`);
-  }
-
-  return Observable.create(observer => {
-    eventStreamObservable.subscribe(
-      (event) => {
-        const newStateKey = curState[event];
-
-        observer.onNext(newStateKey);
-        curState = definition[newStateKey];
-      },
-      (err) => observer.onError(err),
-      () => observer.onCompleted()
-    );
-  });
+function createObservableFSM(definition, initialStateKey, eventStreamObservable) {
+    var curState = definition[initialStateKey];
+    if (!curState) {
+        throw new Error("No state corresponding to key " + initialStateKey + " found");
+    }
+    return new rxjs_1.Observable(function (observer) {
+        eventStreamObservable.subscribe(function (event) {
+            var newState = curState[event];
+            observer.next(newState);
+            curState = definition[newState.name];
+        }, function (err) { return observer.error(err); }, function () { return observer.complete(); });
+    });
 }
+exports.__esModule = true;
+exports["default"] = createObservableFSM;

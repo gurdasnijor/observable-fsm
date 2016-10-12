@@ -14,7 +14,7 @@ if (env === 'build') {
 }
 
 var config = {
-  entry: __dirname + '/src/index.js',
+  entry: __dirname + '/src/index.ts',
   devtool: 'source-map',
   output: {
     path: __dirname + '/lib',
@@ -34,14 +34,19 @@ var config = {
         test: /(\.jsx|\.js)$/,
         loader: 'eslint-loader',
         exclude: /node_modules/
+      },
+      {
+        test: /\.tsx?$/,
+        loader: 'ts',
+        exclude: /node_modules/
       }
-    ]
-  },
-  resolve: {
-    root: path.resolve('./src'),
-    extensions: ['', '.js']
-  },
-  plugins: plugins
+    ],
+    resolve: {
+      root: path.resolve('./src'),
+      extensions: ['', '.js', '.ts']
+    },
+    plugins: plugins
+  }
 };
 
 module.exports = config;

@@ -1,8 +1,13 @@
+
 # observable-fsm
+
 Library for producing an Observable that represents a sequence of states in 
 a state machine being transisitoned by a corresponding Observable sequence of events
 
 Inspired by [rx-state-machine](https://github.com/logicalguess/rx-state-machine/blob/master/js/state-machine.js)
+
+![FSM](https://www.thepastafoundation.org/wp-content/uploads/2015/06/FSM-icon.gif)
+
 
 ```js
 const stateMachineDefinition = {
